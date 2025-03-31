@@ -50,4 +50,4 @@ The second dashboard shows the distibution of offensive yards and age by game we
 ![Dashboard comparing  offensive yards to age and game week](/images/dashboard2.png)
 
 ## Reproducibility
-Please follow the steps set forth [here](/setup.md).
+Instructions for setting up your environment and running the code are provided [here](/setup.md). You can use whatever set up you prefer as long as you have installed the needed tools, adjusted environment variables, and updated files/permissions as instructed in the comments of each respective file.

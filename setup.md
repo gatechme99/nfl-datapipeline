@@ -40,30 +40,39 @@ git clone https://github.com/gatechme99/nfl-datapipeline
 
 3. Provision GCP resources using Terraform.
 ```bash
+# Navigate to the terraform folder
 cd terraform
+
+# Initialize Terraform
 terraform init
+
+# Preview changes Terraform plans to make to infrastructure
 terraform plan
+
+# Execute actions in the Terraform plan 
 terraform apply
 ```
 
 4. Spin up Kestra using Docker.
 ```bash
+# Navigate back up a level
 cd ..
+
+# Run Docker in detached mode
 docker compose up -d
 ```
 
-- You may need to manually forward port 8080.
-- Open a browser tab and navigate to `http://localhost:8080/`.
+5. Open a browser tab and navigate to `http://localhost:8080/`.
+    - You may need to manually forward port 8080.
 
-5. Create a Kaggle account.
+6. Create a Kaggle account.
     - Note your user name.
-    - Under Settings, create a new API token.
+    - Under Settings, create a new API token and save locally.
 
-6. In the Kestra UI:
-
+7. Add your credentails to Kestra in the Kestra UI:
     - Navigate to Flows.
-    - Create a new flow by copying in the code from `gcp_kv.yaml`.
-    - Save the file and xecute the DAG defined in `gcp_kv.yaml`.
+    - Create a new flow by copying in the code from [`gcp_kv.yaml`](/gcp_kv.yaml).
+    - Save the file and xecute the DAG defined in [`gcp_kv.yaml`](/gcp_kv.yaml).
     - Navigate to Namespaces. Select the appropriate namespace. Go to KV Store.
         - Add GCP_CREDS using the json for your service account.
         - Add your KAGGLE_USERNAME.
@@ -71,34 +80,36 @@ docker compose up -d
     
     <img src="/images/kestra_kv.png" alt="kestra_kv_store" width="75%">
 
+8. Download the dataset from Kaggle, unzip the files, and upload them to GCS using the Kestra UI:
     - Navigate back to Flows.
-    - Create another new flow by copying in the code from `kaggle_gcs.yaml`.
-    - Save the file and execute the DAG defined in `kaggle_gcs.yaml`.
+    - Create another new flow by copying in the code from [`kaggle_gcs.yaml`](/kaggle_gcs.yaml).
+    - Save the file and execute the DAG defined in [`kaggle_gcs.yaml`](/kaggle_gcs.yaml).
 
     Navigate to your GCS bucket to confirm 13 CSV files were unzipped and uploaded from Kaggle.
 
-    **NOTE:** If you have issues with Kestra dowloading the dataset from Kaggle and uploading into GCS, download the [zip file locally](https://www.kaggle.com/competitions/nfl-big-data-bowl-2025/data), unzip the files, and upload the `games.csv`, `player_play.csv`, and `players.csv` files to your GCS bucket.
-
     <img src="/images/gcs_bucket.png" alt="gcs_bucket" width="50%">
 
-    - Update `spark_bigquery.py` file. You may need to save this file locally.
+    **NOTE:** If you have issues with Kestra dowloading the dataset from Kaggle and uploading into GCS, download the [zip file locally](https://www.kaggle.com/competitions/nfl-big-data-bowl-2025/data), unzip the files, and manually upload the `games.csv`, `player_play.csv`, and `players.csv` files to your GCS bucket (you do not need all 13 CSV files to create the final table for analysis).
+    
+9. Submit the PySpark job to Dataproc using the Kestra UI:
+    - Update [`spark_bigquery.py`](/spark_bigquery.py) file. You may need to save this file locally.
     - Navigate back to Flows.
-    - Create another new flow by copying in the code from `gcs_dataproc_pyspark.yaml`.
-    - Save the file and execute the DAG defined in `gcs_dataproc_pyspark.yaml`, selecting `spark_bigquery.py` from the UI as the input file.
+    - Create another new flow by copying in the code from [`gcs_dataproc_pyspark`](/gcs_dataproc_pyspark.yaml).
+    - Save the file and execute the DAG defined in [`gcs_dataproc_pyspark`](/gcs_dataproc_pyspark.yaml), selecting [`spark_bigquery.py`](/spark_bigquery.py) from the UI as the input file.
 
     Navigate to BigQuery and confirm the `total_qb_offense` table exists under the `zoomcamp` dataset. There should be 252 rows in the table.
 
     <img src="/images/bq_table.png" alt="final_table" width="50%">
 
-7. Open Looker Studio and connect it to the `total_qb_offense` table in BigQuery.
+10. Open Looker Studio and connect it to the `total_qb_offense` table in BigQuery.
 
-8. Start your data exploration in Looker Studio.
+11. Start your data exploration in Looker Studio.
 
-9. When you are done, run the following to shut down Kestra and tear down the GCP resources:
+12. When you are done, run the following to shut down Kestra and tear down the GCP resources:
 
 ```bash
 docker compose down
-terraform destroy
+terraform destroy # navigate to the terraform folder first
 ```
 
-10. Shut down the VM instance in the GCP Console. You may want to confirm no other virtual machines are running (including Dataproc). You can also confirm resources were destroyed in GCS and BigQuery.
+13. Shut down the VM instance in the GCP Console. You may want to confirm no other virtual machines are running (including Dataproc). You can also confirm resources were destroyed in GCS and BigQuery.
