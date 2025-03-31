@@ -36,7 +36,7 @@ Kestra is used to execute the `kaggle_to_gcs` DAG.
 Kestra is then used execute the `gcp_dataproc_pyspark` DAG.
 - The code to transform the data resides in the PySpark job `spark_bigquery.py`. 
 - The PySpark job is submitted to Google Cloud Dataproc which handles all the clusters needed for transformation.
-- Data is partitioned and written to parquet files
+- Data is partitioned and written to parquet files.
 - The transformed data is loaded into BigQuery as a table.
 - No clustering was performed because the dataset is relatively small, and thus, the benefits may not be as pronounced as with larger datasets.
 
