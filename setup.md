@@ -69,7 +69,7 @@ docker compose up -d
         - Add your KAGGLE_USERNAME.
         - Add your KAGGLE_KEY (API token)
     
-    <img src="/images/kestra_kv.png" alt="kestra_kv_store" width="300">
+    <img src="/images/kestra_kv.png" alt="kestra_kv_store" width="1280">
 
     - Navigate back to Flows.
     - Create another new flow by copying in the code from `kaggle_gcs.yaml`.
@@ -79,7 +79,7 @@ docker compose up -d
 
     **NOTE:** If you have issues with Kestra dowloading the dataset from Kaggle and uploading into GCS, download the [zip file locally](https://www.kaggle.com/competitions/nfl-big-data-bowl-2025/data), unzip the files, and upload the `games.csv`, `player_play.csv`, and `players.csv` files to your GCS bucket.
 
-    ![GCS Bucket for NFL Data](/images/gcs_bucket.png)
+    <img src="/images/gcs_bucket.png" alt="gcs_bucket" width="1280">
 
     - Update `spark_bigquery.py` file. You may need to save this file locally.
     - Navigate back to Flows.
@@ -88,7 +88,7 @@ docker compose up -d
 
     Navigate to BigQuery and confirm the `total_qb_offense` table exists under the `zoomcamp` dataset. There should be 252 rows in the table.
 
-    ![Final table in BigQuery](/images/bq_table.png)
+    <img src="/images/bq_table.png" alt="final_table" width="1280">
 
 7. Open Looker Studio and connect it to the `total_qb_offense` table in BigQuery.
 
