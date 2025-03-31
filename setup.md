@@ -34,7 +34,7 @@
 git clone https://github.com/gatechme99/nfl-datapipeline
 ```
 
-2. Update the [`/terraform/variables.tf`](/terraform/variables.tf) file to match your GCS variables.
+2. Update the [`terraform/variables.tf`](/terraform/variables.tf) file to match your GCS variables.
     - Add GCS credentials, if necessary.
     - Update with your project name, location, and region.
 
