@@ -34,7 +34,7 @@
 git clone https://github.com/gatechme99/nfl-datapipeline
 ```
 
-2. Update the `/terraform/variables.tf` file to match your GCS variables.
+2. Update the [`/terraform/variables.tf`](/terraform/variables.tf) file to match your GCS variables.
     - Add GCS credentials, if necessary.
     - Update with your project name, location, and region.
 
@@ -65,7 +65,7 @@ docker compose up -d
 5. Open a browser tab and navigate to `http://localhost:8080/`.
     - You may need to manually forward port 8080.
 
-6. Create a Kaggle account.
+6. Create a [Kaggle](https://www.kaggle.com/) account.
     - Note your user name.
     - Under Settings, create a new API token and save locally.
 
@@ -76,7 +76,7 @@ docker compose up -d
     - Navigate to Namespaces. Select the appropriate namespace. Go to KV Store.
         - Add GCP_CREDS using the json for your service account.
         - Add your KAGGLE_USERNAME.
-        - Add your KAGGLE_KEY (API token)
+        - Add your KAGGLE_KEY (API token).
     
     <img src="/images/kestra_kv.png" alt="kestra_kv_store" width="75%">
 
