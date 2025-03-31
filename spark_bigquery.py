@@ -3,6 +3,7 @@ from pyspark.sql import types
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import to_date, col, date_format
 
+# Replace with your bucket name.
 bucket_name = 'gs://zoomcamp-446201-bucket'
 
 # Set up Spark session with GCP connections.
