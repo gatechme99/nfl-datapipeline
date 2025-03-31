@@ -2,15 +2,12 @@
 Capstone project for the 2025 Cohort of the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/README.md) presented by DataTalksClub. This final project highlights the fundamentals of data engineering by building an end-to-end data pipeline from scratch, using industry-standard tooling and best practices.
 
 ## Problem Statement
-The regular season of the National Football League (NFL) consists of 272 games, with each of the NFL's 32 teams playing 17 games during an 18-week period with one "bye" week off.
+The regular season of the National Football League (NFL) consists of 272 games, with each of the NFL's 32 teams playing 17 games during an 18-week period with one "bye" week off.The quarterback is widely considered the most important position in the NFL due to their role as the leader of the offense, controlling the ball on nearly every play and making crucial decisions that directly impact the team's performance. 
 
-The quarterback is widely considered the most important position in the NFL due to their role as the leader of the offense, controlling the ball on nearly every play and making crucial decisions that directly impact the team's performance. 
-
-A quarterback's age significantly impacts their performance, with peak performance generally occurring between 26 and 34, after which physical and mental abilities may decline, affecting arm strength, reflexes, and mobility.
-
-NFL injuries, particularly ligament sprains/tears, concussions, and fractures, can significantly impact player performance, leading to missed games, reduced effectiveness, and even career-ending injuries, with some players facing long-term health issues. 
+A quarterback's age significantly impacts their performance, with peak performance generally occurring between 26 and 34, after which physical and mental abilities may decline, affecting arm strength, reflexes, and mobility. NFL injuries, particularly ligament sprains/tears, concussions, and fractures, can significantly impact player performance, leading to missed games, reduced effectiveness, and even career-ending injuries, with some players facing long-term health issues. 
 
 Using data from weeks 1 through 9 of the 2022 NFL regular season, we want to explore:
+
 **1. How age relates to total offensive yards produced.**
 **2. How age relates to offensive yards produced per game week.**
 
