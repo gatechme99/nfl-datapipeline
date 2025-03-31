@@ -31,6 +31,7 @@ The dataset used for this project came from the [NFL Big Data Bowl 2025](https:/
 Kestra is used to execute the [`kaggle_gcs`](/kaggle_gcs.yaml) DAG.
 - The [Kaggle API](https://github.com/Kaggle/kaggle-api) is called to download the zip file for the NFL Big Data Bowl 2025 dataset.
 - The file is unzipped, and 13 CSV files are uploaded to a GCS bucket.
+<img src="/images/gcs_bucket.png" alt="gcs_bucket" width="50%">
 
 ### Transformations & Data Warehouse
 Kestra is then used execute the [`gcs_dataproc_pyspark`](/gcs_dataproc_pyspark.yaml) DAG.
@@ -39,6 +40,7 @@ Kestra is then used execute the [`gcs_dataproc_pyspark`](/gcs_dataproc_pyspark.y
 - Data is partitioned and written to parquet files.
 - The transformed data is loaded into BigQuery as a table.
 - No clustering was performed because the dataset is relatively small, and thus, the benefits may not be as pronounced as with larger datasets.
+<img src="/images/bq_table.png" alt="final_table" width="50%">
 
 ### Dashboards
 Visualization of the transformed data loaded into BigQuery as a table was created using Looker Studio. You can access the dashboards [here](https://lookerstudio.google.com/s/tB6SDPVdITo).
