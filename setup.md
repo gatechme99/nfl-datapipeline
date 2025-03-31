@@ -92,7 +92,7 @@ docker compose up -d
     **NOTE:** If you have issues with Kestra dowloading the dataset from Kaggle and uploading into GCS, download the [zip file locally](https://www.kaggle.com/competitions/nfl-big-data-bowl-2025/data), unzip the files, and manually upload the `games.csv`, `player_play.csv`, and `players.csv` files to your GCS bucket (you do not need all 13 CSV files to create the final table for analysis).
     
 9. Submit the PySpark job to Dataproc using the Kestra UI:
-    - Update [`spark_bigquery.py`](/spark_bigquery.py) file. You may need to save this file locally.
+    - Update the [`spark_bigquery.py`](/spark_bigquery.py) file. You may need to save this file locally in order to select it from the Kestra UI.
     - Navigate back to Flows.
     - Create another new flow by copying in the code from [`gcs_dataproc_pyspark`](/gcs_dataproc_pyspark.yaml).
     - Save the file and execute the DAG defined in [`gcs_dataproc_pyspark`](/gcs_dataproc_pyspark.yaml), selecting [`spark_bigquery.py`](/spark_bigquery.py) from the UI as the input file.
