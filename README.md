@@ -12,7 +12,7 @@ Using data from weeks 1 through 9 of the 2022 NFL regular season, we want to exp
 
    2. How age relates to offensive yards produced per game week.
 
-[^1]Offensive yards are the sum of passing yards and rushing yards less yards lost when a quarterback is sacked (tackled behind the line of scrimmage) by the defense.
+[^1]: Offensive yards are the sum of passing yards and rushing yards less yards lost when a quarterback is sacked (tackled behind the line of scrimmage) by the defense.
 
 ## Architecture
 ![End-to-end data pipeline architecture](/images/architecture.png)
