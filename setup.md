@@ -30,8 +30,8 @@
 ### Running the Code
 
 1. Run the command below to clone this repository:
-```console
-git clone https://github.com/gatechme99/dezoomcamp2025-final-project
+```bash
+git clone https://github.com/gatechme99/nfl-datapipeline
 ```
 
 2. Update the `/terraform/variables.tf` file to match your GCS variables.
@@ -39,7 +39,7 @@ git clone https://github.com/gatechme99/dezoomcamp2025-final-project
     - Update with your project name, location, and region.
 
 3. Provision GCP resources using Terraform.
-```console
+```bash
 cd terraform
 terraform init
 terraform plan
@@ -47,7 +47,7 @@ terraform apply
 ```
 
 4. Spin up Kestra using Docker.
-```console
+```bash
 cd ..
 docker compose up -d
 ```
@@ -63,26 +63,26 @@ docker compose up -d
 
     - Navigate to Flows.
     - Create a new flow by copying in the code from `gcp_kv.yaml`.
-    - Execute the DAG defined in `gcp_kv.yaml`.
-    - Navigate to Namespaces.
+    - Save the file and xecute the DAG defined in `gcp_kv.yaml`.
+    - Navigate to Namespaces. Select the appropriate namespace. Go to KV Store.
         - Add GCP_CREDS using the json for your service account.
         - Add your KAGGLE_USERNAME.
         - Add your KAGGLE_KEY (API token)
     
 
     - Navigate back to Flows.
-    - Create another new flow by copying in the code from `kaggle_to_gcs.yaml`.
-    - Execute the DAG defined in `kaggle_to_gcs.yaml`.
+    - Create another new flow by copying in the code from `kaggle_gcs.yaml`.
+    - Save the file and execute the DAG defined in `kaggle_gcs.yaml`.
 
     Navigate to your GCS bucket to confirm 13 CSV files were unzipped and uploaded from Kaggle.
 
     **NOTE:** If you have issues with Kestra dowloading the dataset from Kaggle and uploading into GCS, download the [zip file locally](https://www.kaggle.com/competitions/nfl-big-data-bowl-2025/data), unzip the files, and upload the `games.csv`, `player_play.csv`, and `players.csv` files to your GCS bucket.
 
 
-    - Update `spark_bigquery` file.
+    - Update `spark_bigquery.py` file. You may need to save this file locally.
     - Navigate back to Flows.
-    - Create another new flow by copying in the code from `gcloudcli_dataproc_pyspark.yaml`.
-    - Execute the DAG defined in `gcloudcli_dataproc_pyspark.yaml`.
+    - Create another new flow by copying in the code from `gcs_dataproc_pyspark.yaml`.
+    - Save the file and execute the DAG defined in `gcs_dataproc_pyspark.yaml`, selecting `spark_bigquery.py` from the UI as the input file.
 
     Navigate to BigQuery and confirm the `total_qb_offense` table exists under the `zoomcamp` dataset. There should be 252 rows in the table.
 
@@ -92,7 +92,7 @@ docker compose up -d
 
 9. When you are done, run the following to shut down Kestra and tear down the GCP resources:
 
-```console
+```bash
 docker compose down
 terraform destroy
 ```

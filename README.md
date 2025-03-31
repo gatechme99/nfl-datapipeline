@@ -9,6 +9,7 @@ A quarterback's age significantly impacts their performance, with peak performan
 Using data from weeks 1 through 9 of the 2022 NFL regular season, we want to explore:
 
 **1. How age relates to total offensive yards produced.**
+
 **2. How age relates to offensive yards produced per game week.**
 
 Offensive yards are the sum of passing yards and rushing yards less yards lost when a quarterback is sacked (tackled behind the line of scrimmage) by the defense.
