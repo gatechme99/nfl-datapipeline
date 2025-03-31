@@ -69,7 +69,7 @@ docker compose up -d
         - Add your KAGGLE_USERNAME.
         - Add your KAGGLE_KEY (API token)
     
-    ![Kestra KV Store](/images/kestra_kv.png)
+    <img src="/images/kestra_kv.png" alt="kestra_kv_store" width="300">
 
     - Navigate back to Flows.
     - Create another new flow by copying in the code from `kaggle_gcs.yaml`.
