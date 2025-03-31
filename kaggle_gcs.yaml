@@ -1,0 +1,39 @@
+id: kaggle_to_gcs
+namespace: zoomcamp
+
+tasks:
+  
+  - id: download_kaggle_dataset
+    type: io.kestra.plugin.scripts.shell.Commands 
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    outputFiles:
+      - "*.csv"
+    commands:
+      - pip install --user kaggle
+      - export KAGGLE_USERNAME={{ kv('KAGGLE_USERNAME') }}
+      - export KAGGLE_KEY={{ kv('KAGGLE_KEY') }}
+      - /root/.local/bin/kaggle competitions download -c nfl-big-data-bowl-2025
+      - unzip nfl-big-data-bowl-2025.zip
+
+  - id: for_each
+    type: io.kestra.plugin.core.flow.ForEach
+    values: "{{ outputs.download_kaggle_dataset.outputFiles | keys }}"  
+    tasks:
+    - id: upload_to_gcs
+      type: io.kestra.plugin.gcp.gcs.Upload
+      from: "{{ outputs.download_kaggle_dataset.outputFiles[taskrun.value] }}"
+      to: "gs://{{ kv('GCP_BUCKET_NAME') }}/{{ taskrun.value }}"
+
+  - id: purge_files
+    type: io.kestra.plugin.core.storage.PurgeCurrentExecutionFiles
+    description: This will remove downloaded files. To explore Kestra outputs, set disabled to true.
+    disabled: false
+
+pluginDefaults:
+  - type: io.kestra.plugin.gcp
+    values:
+      serviceAccount: "{{kv('GCP_CREDS')}}"
+      projectId: "{{kv('GCP_PROJECT_ID')}}"
+      location: "{{kv('GCP_LOCATION')}}"
+      bucket: "{{kv('GCP_BUCKET_NAME')}}"  
