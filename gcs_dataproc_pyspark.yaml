@@ -1,0 +1,26 @@
+id: gcs_dataproc_pyspark
+namespace: zoomcamp
+
+inputs:
+  - id: file
+    type: FILE
+
+tasks:
+  - id: upload
+    type: io.kestra.plugin.gcp.gcs.Upload
+    from: "{{ inputs.file }}"
+    to: "gs://{{ kv('GCP_BUCKET_NAME') }}/code/spark_bigquery.py"
+
+  - id: upload_pyspark_script_gcs
+    type: io.kestra.plugin.gcp.cli.GCloudCLI
+    commands:
+      # make sure cluster and region match your GCP settings
+      - gcloud dataproc jobs submit pyspark gs://{{ kv('GCP_BUCKET_NAME') }}/code/spark_bigquery.py --cluster=nfl-zoomcamp-cluster --region=us-central1
+
+pluginDefaults:
+  - type: io.kestra.plugin.gcp
+    values:
+      serviceAccount: "{{ kv('GCP_CREDS') }}"
+      projectId: "{{ kv('GCP_PROJECT_ID') }}"
+      location: "{{ kv('GCP_LOCATION') }}"
+      bucket: "{{ kv('GCP_BUCKET_NAME') }}"
